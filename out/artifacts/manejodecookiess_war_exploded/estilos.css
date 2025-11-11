@@ -1,0 +1,134 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    /* Fondo con degradado de Rojo Pastel CLARO */
+    background: linear-gradient(135deg, #f0cbcb 0%, #f8e1e1 100%);
+    min-height: 100vh;
+    color: #c48c8c; /* Texto principal (Acento suave) */
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 30px 20px;
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 5px; /* Puntas definidas */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+h1 {
+    text-align: center;
+    color: #d6a3a3; /* Rojo pastel intermedio */
+    margin-bottom: 30px;
+    font-size: 2.5rem;
+    font-weight: 300;
+}
+
+h2 {
+    color: #d6a3a3;
+    margin: 25px 0 15px 0;
+    /* Borde inferior más claro */
+    border-bottom: 2px solid #f8e1e1;
+    padding-bottom: 8px;
+}
+
+#login-info {
+    background: #fcfcfc;
+    padding: 15px;
+    border-radius: 4px;
+    margin-bottom: 25px;
+    /* Borde izquierdo con color pastel intermedio */
+    border-left: 4px solid #d6a3a3;
+}
+
+#welcome-message {
+    font-size: 1.1rem;
+    color: #c48c8c;
+}
+
+#welcome-message a {
+    color: #c48c8c; /* Mismo color suave para evitar contraste fuerte */
+    text-decoration: none;
+    font-weight: 500;
+}
+
+#welcome-message a:hover {
+    text-decoration: underline;
+}
+
+.nav-links {
+    display: flex;
+    gap: 15px;
+    margin: 25px 0;
+    flex-wrap: wrap;
+}
+
+.nav-links a {
+    display: inline-block;
+    padding: 12px 25px;
+    /* Degradado entre tonos de pastel intermedios */
+    background: linear-gradient(45deg, #d6a3a3, #c48c8c);
+    color: white;
+    text-decoration: none;
+    border-radius: 4px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    /* Sombra con color pastel */
+    box-shadow: 0 4px 15px rgba(214, 163, 163, 0.5);
+}
+
+.nav-links a:hover {
+    transform: translateY(-2px);
+    /* Sombra con color pastel */
+    box-shadow: 0 6px 20px rgba(196, 140, 140, 0.6);
+    background: linear-gradient(45deg, #c48c8c, #d6a3a3);
+}
+
+#productos-container {
+    background: white;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 20px 0;
+    background: white;
+    border-radius: 5px;
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+th, td {
+    /* Borde muy claro */
+    border: 1px solid #f0eaea;
+    padding: 12px 15px;
+    text-align: left;
+}
+
+/* Encabezado de tabla */
+th {
+    /* Degradado entre tonos de pastel intermedios */
+    background: linear-gradient(45deg, #d6a3a3, #c48c8c);
+    color: white;
+    font-weight: 600;
+}
+
+/* Filas pares con color de fondo muy claro */
+tr:nth-child(even) {
+    background-color: #fcfcfc;
+}
+
+tr:hover {
+    background-color: #fff0f0;
+    transition: background-color 0.2s ease;
+}
