@@ -4,17 +4,16 @@ package servlet;
  * */
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
-import jakarta.servlet.http.Cookie;
-import jakarta.servlet.http.HttpServlet;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.*;
+import services.LoginService;
+import services.LoginServiceSessionImpl;
 
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Arrays;
 import java.util.Optional;
 
-@WebServlet({"/Login" , "/Login.html"})
+@WebServlet({"/login", "/login.html"})
 public class LoginServlet extends HttpServlet {
     // Iniciamos las variables estaticas para el login
     final static String USERNAME = "admin";
@@ -22,28 +21,33 @@ public class LoginServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        // Creamos la cookie
-        Cookie[] cookies = req.getCookies() != null ? req.getCookies() : new Cookie[0];
-        // Busco dentro de la cookie si existe información
-        Optional<String> cookieOptional = Arrays.stream(cookies)
-                .filter(c -> "username".equals(c.getName()))
-                // Convertimos la cookie a tipo string
-                .map(Cookie::getValue)
-                .findAny();
-        if (cookieOptional.isPresent()) {
+        LoginService auth = new LoginServiceSessionImpl();
+        Optional<String> usernameOptional = auth.getUsername(req);
+
+        if (usernameOptional.isPresent()) {
+            HttpSession session = req.getSession();
+
+            // 2. RECUPERAR EL CONTADOR
+            Integer counter = (Integer) session.getAttribute("loginCounter");
+
+            // 3. DECLARAR Y ASIGNAR counterText
+            // Se declara la variable local que el error te pedía.
+            String counterText = (counter != null) ? counter.toString() : "0";
             resp.setContentType("text/html;charset=UTF-8");
-            try(PrintWriter out = resp.getWriter()) {
-                // Creamos la plantilla html
+            try (PrintWriter out = resp.getWriter()) {
+
                 out.println("<!DOCTYPE html>");
                 out.println("<html>");
                 out.println("<head>");
-                out.println("<title>Login " + cookieOptional.get() + "</title>");
-                out.println("<meta charset=utf-8>");
+                out.println("  <meta charset=\"UTF-8\">");
+                out.println("  <title>Hola " + usernameOptional.get() + "</title>");
+                out.println("<link rel=\"stylesheet\" href=\"" + req.getContextPath() + "/estilos.css\">");
                 out.println("</head>");
                 out.println("<body>");
-                out.println("<h1>Servlet Login</h1>");
-                out.println("<p>Bienvenido a mi sistema " + cookieOptional.get() + ", ya has iniciado sesión</p>");
-                out.println("<a href='" + req.getContextPath() + "/Index.html'>Volver al Inicio</a>");
+                out.println("<h1>Hola " + usernameOptional.get() + " has iniciado sesión con éxito!</h1>");
+                out.println("<p>Veces logueado en esta sesión: <strong>" + counterText + "</strong></p>");
+                out.println("  <p><a href='" + req.getContextPath() + "/Index.html'>volver</a></p>");
+                out.println("  <p><a href='" + req.getContextPath() + "/logout'>cerrar sesión</a></p>");
                 out.println("</body>");
                 out.println("</html>");
             }
@@ -54,22 +58,30 @@ public class LoginServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String username = req.getParameter("user");
+        String username = req.getParameter("username");
         String password = req.getParameter("password");
 
-        // Validar contra las constantes USERNAME y PASSWORD
-        if(USERNAME.equals(username) && PASSWORD.equals(password)) {
-            // Crear cookie de sesión
-            Cookie cookie = new Cookie("username", username);
-            // Configurar la cookie para que dure 1 hora
-            cookie.setMaxAge(3600);
-            cookie.setPath("/");
-            resp.addCookie(cookie);
+        if (USERNAME.equals(username) && PASSWORD.equals(password)) {
 
-            // Redirigir al index después del login exitoso
-            resp.sendRedirect(req.getContextPath() + "/Index.html");
+            HttpSession session = req.getSession();
+            session.setAttribute("username", username);
+
+            resp.sendRedirect(req.getContextPath() + "/login.html");
+
+            Integer counter = (Integer) session.getAttribute("loginCounter");
+
+            if (counter == null) {
+                // Si es la primera vez en esta sesión
+                counter = 1;
+            } else {
+                // Si ya existe, lo incrementamos
+                counter++;
+            }
+            // Guardar el valor actualizado en la sesión
+            session.setAttribute("loginCounter", counter);
+
         } else {
-            resp.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Lo sentimos no tiene acceso o no ingreso los datos correctamente");
+            resp.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Lo sentimos no esta autorizado para ingresar a esta página!");
         }
     }
 }

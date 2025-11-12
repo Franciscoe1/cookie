@@ -6,28 +6,32 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%---Creación del formulario---%>
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <title>Iniciar Sesión</title>
-    <link rel="stylesheet" href="Loginestilos.css">
+    <meta charset="UTF-8">
+    <title>Login de Usuario</title>
+    <link rel="stylesheet" href="estilos.css">
 </head>
 <body>
-<div class="login-container">
-    <h1 class="login-title">Iniciar Sesión</h1>
-    <form class="login-form" action="Login" method="post">
-        <div class="form-group">
-            <label for="user">Usuario</label>
-            <input type="text" id="user" name="user" placeholder="Ingrese su usuario" required>
-        </div>
-        <div class="form-group">
-            <label for="password">Contraseña</label>
-            <input type="password" id="password" name="password" placeholder="Ingrese su contraseña" required>
-        </div>
-        <div class="form-group">
-            <input type="submit" class="submit-btn" value="Entrar">
-        </div>
-    </form>
-</div>
+<h1>Iniciar Sesión</h1>
+<%-- El formulario envía la petición POST al LoginServlet --%>
+<form action="<%= request.getContextPath() %>/login" method="post">
+    <div>
+        <label for="username">Usuario:</label>
+        <input type="text" id="username" name="username" required>
+    </div>
+    <br>
+    <div>
+        <label for="password">Contraseña:</label>
+        <input type="password" id="password" name="password" required>
+    </div>
+    <br>
+    <div>
+        <button type="submit">Ingresar</button>
+    </div>
+</form>
+<br>
+<p><a href="<%= request.getContextPath() %>/Index.html">Volver al inicio</a></p>
 </body>
 </html>

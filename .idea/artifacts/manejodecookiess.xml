@@ -1,6 +1,6 @@
 <component name="ArtifactManager">
-  <artifact type="exploded-war" name="manejodecookiess:war exploded">
-    <output-path>$PROJECT_DIR$/out/artifacts/manejodecookiess_war_exploded</output-path>
+  <artifact type="exploded-war" name="manejodecookiess">
+    <output-path>$PROJECT_DIR$/out/artifacts/manejodecookiess</output-path>
     <root id="root">
       <element id="directory" name="WEB-INF">
         <element id="directory" name="classes">

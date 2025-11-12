@@ -1,94 +1,16 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Manejo de cabeceros</title>
+    <title>Cabeceras Http</title>
     <link rel="stylesheet" href="estilos.css">
 </head>
 <body>
-<div class="container">
-    <h1>Manejo de cabeceros</h1>
-
-    <!-- Mostrar información de login si está logueado -->
-    <div id="login-info">
-        <p id="welcome-message">No hay sesión activa</p>
-    </div>
-
-    <div class="nav-links">
-        <a href="producto.xls">Ver Listado de Productos</a>
-        <a href="Login.jsp">Iniciar Sesión</a>
-    </div>
-
-    <!-- Listado de productos -->
-    <h2>Listado de Productos</h2>
-    <div id="productos-container">
-        <p>Cargando productos...</p>
-    </div>
-</div>
-
-<script>
-    // Función para verificar el estado de login
-    function checkLoginStatus() {
-        function getCookie(name) {
-            const value = `; ${document.cookie}`;
-            const parts = value.split(`; ${name}=`);
-            if (parts.length === 2) return parts.pop().split(';').shift();
-        }
-
-        const username = getCookie('username');
-        const welcomeMessage = document.getElementById('welcome-message');
-
-        if (username) {
-            welcomeMessage.innerHTML = 'Bienvenido: <strong>' + username + '</strong> | <a href="#" onclick="logout()">Cerrar Sesión</a>';
-        } else {
-            welcomeMessage.innerHTML = 'No hay sesión activa';
-        }
-    }
-
-    // Función para cerrar sesión
-    function logout() {
-        document.cookie = "username=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
-        location.reload();
-    }
-
-    // Función para cargar productos
-    function cargarProductos() {
-        fetch('producto.xls')
-            .then(response => response.text())
-            .then(html => {
-                const tempDiv = document.createElement('div');
-                tempDiv.innerHTML = html;
-                const tablaProductos = tempDiv.querySelector('table');
-                const loginInfo = tempDiv.querySelector('p');
-
-                const container = document.getElementById('productos-container');
-                if (tablaProductos) {
-                    container.innerHTML = '';
-                    if (loginInfo) {
-                        container.appendChild(loginInfo);
-                    }
-                    container.appendChild(tablaProductos);
-
-                    const volverLink = tempDiv.querySelector('a');
-                    if (volverLink) {
-                        container.appendChild(volverLink.cloneNode(true));
-                    }
-                }
-            })
-            .catch(error => {
-                console.error('Error cargando productos:', error);
-                document.getElementById('productos-container').innerHTML =
-                    '<p>Error al cargar los productos. <a href="producto.xls">Ver listado completo</a></p>';
-            });
-    }
-
-    // Verifica el estado del login y carga los productos
-    document.addEventListener('DOMContentLoaded', function() {
-        checkLoginStatus();
-        cargarProductos();
-    });
-</script>
-
+<h3>Manejo de cookies Http</h3>
+<ul>
+    <li><a href="productos.html">productos html</a></li>
+    <li><a href="login.html">acceso</a></li>
+    <li><a href="logout">cerrar sesión</a></li>
+</ul>
 </body>
 </html>

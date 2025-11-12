@@ -4,9 +4,11 @@ package services;
  * */
 
 import modelos.Producto;
-
 import java.util.List;
+import java.util.Optional;
 
 public interface ProductoServices {
-    abstract List<Producto> listar();
+    List<Producto> listar();
+
+    Optional<Producto> porId(Long id);
 }
