@@ -1,47 +1,36 @@
-/* Colores Pastel */
+/* Colores Pastel Definidos */
 :root {
-    --primary-color: #FFD1DC; /* Rosa Pastel Claro */
-    --accent-color: #CBAACB; /* Malva Pastel */
-    --text-color: #333333; /* Gris Oscuro */
-    --background-color: #f8f8f8;
+    --primary-color: #FFD1DC; /* Rosa Pastel Claro (Títulos, Tablas TH) */
+    --accent-color: #CBAACB; /* Malva Pastel (Enlaces, Botones, Borde de Tabla) */
+    --text-color: #333333; /* Gris Oscuro para texto principal */
+    --background-color: rgba(255, 209, 220, 0.42); /* Fondo principal claro */
+    --welcome-bg: #FFF0F5; /* Un rosa aún más pálido para mensajes */
 }
 
+/* Estilos Generales del Cuerpo */
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     margin: 40px;
     background-color: var(--background-color);
     color: var(--text-color);
+    line-height: 1.6;
 }
 
-h1, h3 {
+/* Encabezados */
+h1, h2, h3 {
     color: var(--primary-color);
     text-shadow: 1px 1px 2px #fff;
+    /* Usamos el color principal para la línea inferior */
+    border-bottom: 2px solid var(--primary-color);
+    padding-bottom: 5px;
+    margin-bottom: 20px;
 }
 
-/* Estilos de Tablas (Para ProductoServlet) */
-table {
-    border-collapse: collapse;
-    width: 80%;
-    margin-top: 25px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-th, td {
-    border: 1px solid var(--accent-color);
-    padding: 12px 15px;
-    text-align: left;
-}
-
-th {
-    background-color: var(--primary-color);
-    color: white;
-    font-weight: bold;
-}
-
-/* Estilos de Enlaces y Botones */
+/* Enlaces */
 a {
     color: var(--accent-color);
     text-decoration: none;
+    transition: color 0.3s;
     font-weight: 500;
 }
 
@@ -50,7 +39,44 @@ a:hover {
     text-decoration: underline;
 }
 
-/* Estilos de Formularios (Para login.jsp) */
+/* Listas */
+ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 15px 0;
+}
+
+ul li {
+    margin: 8px 0;
+}
+
+/* Tablas */
+table {
+    width: 80%;
+    margin: 20px auto;
+    border-collapse: collapse;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+}
+
+th, td {
+    border: 1px solid var(--accent-color); /* Borde con color acento */
+    padding: 12px 15px;
+    text-align: left;
+}
+
+th {
+    background-color: var(--primary-color); /* Fondo con color primario */
+    color: white;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+/* Estilos de Formularios (Para inputs generales fuera del login) */
 input[type="text"], input[type="password"], button {
     padding: 10px;
     margin-top: 5px;
@@ -72,15 +98,15 @@ button:hover {
     background-color: var(--primary-color);
 }
 
-/* Clase para el mensaje de bienvenida y el contador */
+/* Mensajes de Bienvenida (Unificado para .bienvenida y .welcome-message) */
+.bienvenida,
 .welcome-message {
-    color: var(--accent-color);
-    font-size: 1.1em;
-    font-weight: bold;
-    margin-bottom: 20px;
     padding: 10px;
+    background-color: var(--welcome-bg);
     border: 1px solid var(--primary-color);
-    background-color: #FFF0F5; /* Un rosa aún más pálido */
-    display: inline-block;
     border-radius: 5px;
+    margin-bottom: 20px;
+    color: var(--accent-color);
+    font-weight: bold;
+    display: inline-block; /* Para que el fondo solo cubra el contenido */
 }

@@ -31,18 +31,18 @@ public class ProductoXlsServlet extends HttpServlet {
 
         try (PrintWriter out = resp.getWriter()) {
             out.println("<!DOCTYPE html>");
+            out.println("<link rel=\"stylesheet\" href=\"" + req.getContextPath() + "/estilos.css\">");
             out.println("<html>");
             out.println("<head>");
             out.println("<meta charset=\"UTF-8\">");
             out.println("<title>Listado de Productos</title>");
-            out.println("<link rel=\"stylesheet\" href=\"" + req.getContextPath() + "/estilos.css\">");
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Listado de Productos</h1>");
 
             // Fragmento proporcionado
             if(usernameOptional.isPresent()) {
-                out.println("<div style='color: blue;'>Hola " + usernameOptional.get() + " Bienvenido!</div>");
+                out.println("<div style='bienvenida'>Hola " + usernameOptional.get() + " Bienvenido!</div>");
             }
 
             out.println("<table>");
@@ -71,6 +71,7 @@ public class ProductoXlsServlet extends HttpServlet {
             });
 
             out.println("</table>");
+            out.println("<div class='actions'><a class='button secondary' href='"+req.getContextPath()+"/Index.html'>Inicio</a></div>");
             out.println("</body>");
             out.println("</html>");
         }

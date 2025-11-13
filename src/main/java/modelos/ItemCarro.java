@@ -1,7 +1,6 @@
 package modelos;
 
 import java.util.Objects;
-
 public class ItemCarro {
     private int cantidad;
     private Producto producto;
